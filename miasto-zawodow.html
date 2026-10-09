@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Miasto Zawodów</title>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0b1226;--p:#162040;--p2:#1f2c55;--l:#2d3d73;--t:#f1f5ff;--m:#9fb0d9;--gold:#fbbf24;--g:#22c55e;--b:#3b82f6}
+*{box-sizing:border-box;margin:0}
+body{font-family:Manrope,"Segoe UI",sans-serif;background:radial-gradient(circle at 20% -10%,#1c2a5e,var(--bg) 55%) fixed;color:var(--t);min-height:100vh;font-weight:500}
+h1,h2,h3,.d{font-family:Sora,Manrope,sans-serif;font-weight:700}
+button{font:inherit;font-weight:800;cursor:pointer;border:0;border-radius:12px;padding:10px 18px;color:#fff;background:var(--b)}
+button:hover:not(:disabled){filter:brightness(1.12)}button:disabled{opacity:.4;cursor:not-allowed}
+input,textarea,select{font:inherit;background:var(--bg);color:var(--t);border:2px solid var(--l);border-radius:10px;padding:8px}
+header{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:10px 22px;background:rgba(22,32,64,.93);border-bottom:2px solid var(--l);position:sticky;top:0;z-index:5}
+header h1{font-size:1.25rem}.tm{display:flex;gap:8px;align-items:center}.tm input{width:56px;text-align:center;font-weight:800}
+#clk{font:700 1.9rem "Courier New",monospace;color:#38bdf8;min-width:90px;text-align:center}#clk.end{color:#ef4444}
+main{padding:18px 22px;max-width:1500px;margin:auto}
+.card{background:var(--p);border-radius:18px;padding:18px;margin-bottom:14px}
+.setup{max-width:600px;margin:26px auto;display:grid;gap:12px}.setup label{display:grid;gap:4px;color:var(--m)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.fc{background:var(--p);border:3px solid var(--c,var(--l));border-radius:16px;padding:14px;animation:pop .5s both}
+@keyframes pop{from{opacity:0;transform:scale(.92)}}
+.fc input.nm{width:100%;font:700 1.1rem Sora;margin-bottom:8px}
+.jc{border-left:6px solid var(--c);background:var(--p2);border-radius:10px;padding:7px 10px;margin-top:7px}.jc small{display:block;color:var(--m)}
+.hero{position:relative;border-radius:20px;overflow:hidden;margin-bottom:14px;min-height:230px;background:var(--p)}
+.hero svg{display:block;width:100%;height:230px}.hero .tx{padding:16px 20px;background:var(--p2)}
+.hero .tx p{font-size:1.2rem;line-height:1.5}
+.sun{transform-origin:690px 70px;animation:pl 3s ease-in-out infinite}@keyframes pl{50%{transform:scale(1.14)}}
+.rain line{stroke:#dbeafe;stroke-width:2;animation:fall .9s linear infinite}@keyframes fall{from{transform:translateY(-30px)}to{transform:translateY(220px)}}
+.pin{animation:bob 1.2s ease-in-out infinite}@keyframes bob{50%{transform:translateY(-10px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}}
+.steps{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}.steps div{padding:7px 14px;border-radius:99px;background:var(--p2);color:var(--m);font-weight:800;font-size:.95rem}.steps .on{background:var(--b);color:#fff}
+.city{display:flex;gap:8px;font-size:1.8rem;align-items:center}.city small{font:700 1rem Manrope;color:var(--m)}
+.key{background:rgba(251,191,36,.15);border-left:4px solid var(--gold);padding:6px 10px;border-radius:8px;margin-top:8px;font-weight:700}.fc ul{padding-left:20px;margin-top:6px}.big{font-size:1.45rem}#pr{display:none}.qq svg{width:100%;height:auto;display:block}.sheet{max-width:640px;margin:auto}.sl{display:grid;gap:5px;font-weight:700;margin-bottom:12px}.sl textarea{width:100%;font-size:1rem}.pgb{margin:10px 0;color:var(--gold);font-weight:800}.ov{position:fixed;inset:0;background:var(--bg);z-index:20;overflow:auto;padding:20px;font-size:1.25rem;line-height:1.5}.ov h3{margin-top:14px;color:var(--gold)}.ov button{margin-top:20px;width:100%;padding:14px}.task{font-size:1.3rem;margin:4px 0 8px}
+.rub{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.rub>div{background:var(--p2);border-radius:12px;padding:10px}.rub b{display:block;margin-bottom:4px}.rub p{font-size:.9rem;color:var(--m);margin-top:3px}.rub p i{font-style:normal;color:var(--gold);font-weight:800}
+.sc{display:grid;grid-template-columns:1fr repeat(3,auto);gap:8px 10px;align-items:center}.sc .h{color:var(--m);font-size:.85rem;text-align:center}
+.pt{background:var(--l);padding:8px 14px}.pt.on{background:var(--g)}
+.nav{display:flex;justify-content:space-between;margin-top:14px}
+table{width:100%;border-collapse:collapse}th,td{padding:8px;text-align:center;border-bottom:1px solid var(--l)}td:first-child,th:first-child{text-align:left}
+dialog{border:3px solid var(--l);border-radius:18px;background:var(--p);color:var(--t);padding:22px;width:min(520px,92vw)}dialog::backdrop{background:rgba(5,9,25,.8)}
+@media(max-width:800px){.rub{grid-template-columns:1fr}}
+@media print{header,main,dialog{display:none!important}body{background:#fff;color:#000}#pr{display:block}.pg{page-break-after:always;color:#000;font-size:10.5pt;line-height:1.35}.pg:last-child{page-break-after:auto}.pg h2{font-size:15pt}.pg h4{margin:9px 0 3px}.pg .key{background:#fff7d6;border-left:4px solid #b8860b}.ln{border-bottom:1px solid #777;height:21px}.bx{border:1px solid #777;height:120px}.pg table{width:100%;border-collapse:collapse}.pg td{border:1px solid #777;padding:5px;height:30px;text-align:left}}
+</style></head><body>
+<header><h1>🏙️ Miasto Zawodów</h1>
+<div class="tm"><input id="min" type="number" value="6" min="1" aria-label="Minuty"> min <button id="ts" style="background:var(--g)">START</button><button id="tr" style="background:#64748b">RESET</button><div id="clk">00:00</div></div>
+<div><button id="rk" style="background:#64748b">📊 Ranking</button> <button id="nw" style="background:#64748b">Nowa gra</button></div></header>
+<main id="app"></main><dialog id="dlg"></dialog><div id="pr"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<script>
+const $=s=>document.querySelector(s),rnd=a=>a[Math.floor(Math.random()*a.length)];
+const shuf=a=>{a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const AR=[["🌿","Zielone i odporne miasto","#22c55e"],["🚋","Infrastruktura i mobilność","#ef4444"],["🫂","Mieszkańcy i usługi publiczne","#eab308"],["📊","Dane i inteligentne systemy","#3b82f6"],["🎨","Komunikacja i projektowanie przestrzeni","#a16a45"]];
+const JB=["Projektant ogrodów deszczowych|projektuje miejsca zatrzymujące wodę opadową;Specjalista ds. bioróżnorodności miejskiej|wspiera ochronę roślin i zwierząt w mieście;Specjalista ds. odporności miasta na upały|szuka sposobów ograniczania skutków upałów;Projektant zielonych dachów|łączy zieleń z funkcjonowaniem budynków;Specjalista ds. jakości powietrza|analizuje zanieczyszczenia i chroni mieszkańców;Koordynator gospodarki obiegu zamkniętego|ogranicza odpady, wspiera ponowne użycie zasobów",
+"Planista mobilności miejskiej|analizuje, jak przemieszczają się mieszkańcy;Projektant infrastruktury rowerowej|planuje trasy i parkingi dla rowerów;Koordynator transportu publicznego|organizuje połączenia, przesiadki i przepływ pasażerów;Projektant inteligentnego oświetlenia|łączy bezpieczeństwo z oszczędnością energii;Specjalista ds. infrastruktury ładowania|planuje punkty ładowania pojazdów elektrycznych;Inspektor bezpieczeństwa infrastruktury|wykrywa zagrożenia w przestrzeni publicznej",
+"Konsultant społeczny miasta|poznaje potrzeby mieszkańców;Mediator lokalny|pomaga rozwiązywać konflikty;Projektant usług publicznych|usprawnia korzystanie z miejskich usług;Specjalista ds. dostępności przestrzeni|sprawdza, czy przestrzeń jest dostępna dla wszystkich;Koordynator wsparcia mieszkańców|organizuje pomoc i przepływ informacji;Planista bezpieczeństwa lokalnego|analizuje zagrożenia i proponuje działania",
+"Analityk ruchu miejskiego|bada dane o ruchu i szuka sposobów ograniczania korków;Kartograf cyfrowy|tworzy mapy i przedstawia informacje przestrzenne;Specjalista GIS|łączy dane z mapami i analizuje zależności;Projektant cyfrowego modelu miasta|tworzy cyfrowe odwzorowania do testowania zmian;Analityk zużycia energii|analizuje zapotrzebowanie budynków na energię;Specjalista ds. ochrony danych mieszkańców|dba o bezpieczne wykorzystanie informacji",
+"Projektant systemu informacji miejskiej|tworzy oznaczenia i mapy ułatwiające orientację;Twórca kampanii społecznej|przygotowuje przekaz zachęcający do działań;Projektant przestrzeni spotkań|planuje miejsca odpoczynku i aktywności;Koordynator wydarzeń miejskich|organizuje wydarzenia z uwzględnieniem logistyki;Projektant infografik miejskich|pokazuje złożone dane w czytelnej formie;Projektant UX usług miejskich|sprawdza, czy aplikacje i procedury są zrozumiałe"].map(s=>s.split(";").map(x=>x.split("|")));
+const TR=[
+{n:"Miasto w czasie fali upałów",p:"Przez pięć dni temperatura sięga 34–36°C. Przestrzeń miejska mocno się nagrzewa, a mieszkańcy mają utrudniony dostęp do cienia, wody i miejsc odpoczynku.",r:"Propozycja rozwiązania z odbiorcami, miejscem zastosowania i przewidywanym efektem.",s:[
+["Ogranicz nagrzewanie wybranego miejsca w mieście","wskaż konkretne miejsce i odbiorców;opisz przewidywany efekt","do wdrożenia w 5 dni, bez budowy na stałe"],
+["Zaplanuj bezpieczny dostęp do wody pitnej","wskaż, gdzie woda będzie dostępna i dla kogo;opisz, jak zadbać o czystość i porządek","woda bezpłatna i dostępna także dla osób z niepełnosprawnościami"],
+["Zaproponuj rozwiązania ułatwiające poruszanie się w upał","wskaż trasę lub miejsca, których dotyczy zmiana;wskaż, kto skorzysta","rozwiązanie działa w godzinach największego upału (12–17)"],
+["Zaplanuj wsparcie dla mieszkańców najbardziej narażonych","wskaż, kto jest najbardziej narażony i dlaczego;opisz, kto i jak im pomoże","pomoc dociera także do osób, które nie wyjdą z domu"],
+["Przygotuj system informacji o miejscach schłodzenia i pomocy","wskaż, jakie informacje i gdzie się pojawią;wskaż, do kogo mają dotrzeć","informacja zrozumiała także dla osób bez internetu"]]},
+{n:"Miasto bez głównej linii tramwajowej",p:"Główna linia tramwajowa zostaje zamknięta na 10 dni. Są korki, autobusy są przepełnione, a mieszkańcy muszą dotrzeć do pracy, szkoły i urzędów.",r:"Schemat alternatywnego przemieszczania się lub plan usprawnienia komunikacji z uzasadnieniem.",s:[
+["Zorganizuj alternatywne połączenia","wskaż trasy lub linie zastępcze;wskaż, kogo dotyczą zmiany","mieszkańcy dotrą do szkół i urzędów w rozsądnym czasie"],
+["Usprawnij informację dla pasażerów","wskaż, gdzie i w jakiej formie pojawi się informacja;zaproponuj prosty komunikat","informacja jest na przystankach, nie tylko w aplikacji"],
+["Popraw dostępność tras dla osób z trudnościami w poruszaniu się","wskaż, kogo dotyczą utrudnienia;zaproponuj konkretne zmiany na trasie","trasa możliwa do pokonania wózkiem lub z laską"],
+["Wskaż najważniejsze miejsca wymagające interwencji","wskaż 3 miejsca i uzasadnij wybór;zaproponuj, co zrobić w każdym","interwencje do wdrożenia w czasie zamknięcia linii (10 dni)"],
+["Zaplanuj bezpieczne trasy piesze i rowerowe jako alternatywę","wskaż przebieg trasy;wskaż zagrożenia i sposób ich ograniczenia","trasa bezpieczna dla dzieci idących do szkoły"]]},
+{n:"Gwałtowna ulewa i zalane przejście",p:"Po ulewie woda gromadzi się w przejściu podziemnym i na placu między blokami. Część mieszkańców nie może dotrzeć do przystanku i lokalnych usług.",r:"Prosty plan: co zrobić od razu, a co wymaga dłuższego przygotowania.",s:[
+["Zapewnij bezpieczne trasy dla pieszych","wskaż trasę omijającą zalane miejsca;zaplanuj oznaczenie zagrożeń","trasa prowadzi do przystanku"],
+["Zaplanuj zatrzymywanie i odprowadzanie wody","wskaż, gdzie woda ma się zatrzymać lub odpłynąć;opisz rozwiązanie doraźne i długoterminowe","rozwiązanie doraźne można wykonać jeszcze dziś"],
+["Wskaż miejsca zagrożone podtopieniem","wskaż co najmniej 3 miejsca i powód zagrożenia;zaproponuj oznaczenie na mapie","uzasadnienie oparte na ukształtowaniu terenu lub zabudowie"],
+["Zaplanuj ostrzeganie mieszkańców","wskaż kanały ostrzegania;napisz krótki komunikat","ostrzeżenie dociera także do seniorów"],
+["Zabezpiecz dostęp do usług i pomocy","wskaż usługi, do których dostęp trzeba zabezpieczyć;wskaż, jak mieszkańcy dotrą do pomocy","dojazd służb ratunkowych pozostaje możliwy"]]},
+{n:"Nowa usługa cyfrowa dla mieszkańców",p:"Miasto uruchamia zgłaszanie usterek: dziurawych chodników, zgaszonych lamp, przepełnionych koszy. Usługa ma być prosta, chronić prywatność i działać także dla osób bez smartfona.",r:"Schemat obsługi od zgłoszenia do informacji o rozwiązaniu, z dostępnością i ochroną danych.",s:[
+["Zaprojektuj ścieżkę zgłoszenia krok po kroku","narysuj kroki od zgłoszenia do informacji zwrotnej;wskaż, kto zajmuje się zgłoszeniem","zgłoszenie zajmuje mieszkańcowi mniej niż minutę"],
+["Zadbaj o ochronę danych i prywatność","wskaż, jakie dane są potrzebne, a jakie zbędne;opisz, kto ma do nich dostęp","zbierane są tylko niezbędne dane"],
+["Zapewnij dostępność dla seniorów i osób bez smartfona","zaproponuj co najmniej 2 inne sposoby zgłoszenia;wskaż, kto pomoże w zgłoszeniu","zgłoszenie możliwe bez smartfona"],
+["Zaprojektuj mapę i widok zgłoszeń dla urzędu","opisz, jakie informacje widzi urzędnik;wskaż, jak ustalać priorytety","urzędnik od razu widzi zgłoszenia pilne dla bezpieczeństwa"],
+["Przygotuj komunikaty zachęcające do zgłaszania","napisz hasło i krótki komunikat;wskaż, gdzie zostanie rozpowszechniony","komunikat zrozumiały dla każdego wieku"]]},
+{n:"Plac, którego potrzebują wszyscy",p:"Miasto odnawia zaniedbany plac. Młodzież chce miejsca spotkań, seniorzy ciszy, rodzice bezpieczeństwa dzieci, sklepy większego ruchu. Budżet pozwala na tylko 3 główne elementy!",r:"Szkic placu z trzema elementami i uzasadnieniem decyzji.",s:[
+["Priorytet: strefa dla młodzieży","wskaż, czego potrzebuje młodzież;uwzględnij co najmniej jedną inną grupę","tylko 3 główne elementy (budżet!)"],
+["Priorytet: strefa spokoju dla seniorów","wskaż, czego potrzebują seniorzy;uwzględnij co najmniej jedną inną grupę","tylko 3 główne elementy (budżet!)"],
+["Priorytet: bezpieczna strefa dla dzieci i rodziców","wskaż, co zapewni bezpieczeństwo dzieci;uwzględnij co najmniej jedną inną grupę","tylko 3 główne elementy (budżet!)"],
+["Priorytet: rozwiązania wspierające lokalne sklepy","wskaż, jak plac przyciągnie klientów;nie utrudniaj życia mieszkańcom","tylko 3 główne elementy (budżet!)"],
+["Priorytet: oświetlenie, bezpieczeństwo i dostępność placu","wskaż miejsca wymagające oświetlenia;zapewnij dostęp dla wózków i rowerów","tylko 3 główne elementy (budżet!)"]]}];
+const SK=[["#fb923c","#fde68a"],["#1e3a8a","#93c5fd"],["#334155","#94a3b8"],["#0f766e","#99f6e4"],["#f59e0b","#fef3c7"]];
+const EX=[`<circle class="sun" cx="690" cy="70" r="44" fill="#fff7ae"/><text x="60" y="150" font-size="64">🌡️</text><text x="140" y="140" font-size="44" font-weight="800" fill="#7c2d12">36°C</text><text x="330" y="170" font-size="60">🥵</text><text x="450" y="170" font-size="56">💧</text>`,
+`<text x="80" y="170" font-size="76">🚋</text><text x="250" y="170" font-size="60">🚧</text><text x="380" y="170" font-size="64">🚌</text><text x="480" y="170" font-size="48">🚗🚗🚗</text>`,
+`<text x="120" y="70" font-size="70">☁️</text><text x="400" y="60" font-size="80">🌧️</text><text x="620" y="80" font-size="70">☁️</text><text x="90" y="190" font-size="56">🌊</text><text x="300" y="185" font-size="56">🚶☂️</text><text x="520" y="190" font-size="56">🌊🌊</text>`,
+`<text x="120" y="160" font-size="90">📱</text><text class="pin" x="230" y="120" font-size="54">📍</text><text x="400" y="170" font-size="60">💡</text><text x="520" y="170" font-size="60">🕳️</text><text x="620" y="170" font-size="60">✅</text>`,
+`<text x="60" y="170" font-size="60">🌳</text><text x="180" y="170" font-size="60">⛲</text><text x="300" y="170" font-size="54">🧓</text><text x="400" y="170" font-size="54">👧</text><text x="500" y="170" font-size="54">🛝</text><text x="620" y="170" font-size="60">🏪</text>`];
+function scene(i){const[a,b]=SK[i];let rain="";if(i==2)for(let k=0;k<40;k++)rain+=`<line x1="${k*20+Math.random()*10}" y1="0" x2="${k*20}" y2="22" style="animation-delay:${(Math.random()*.9).toFixed(2)}s"/>`;
+ return`<svg viewBox="0 0 800 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="k${i}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${a}"/><stop offset="1" stop-color="${b}"/></linearGradient></defs><rect width="800" height="220" fill="url(#k${i})"/><g fill="#0f172a" opacity=".28"><rect y="120" width="60" height="100"/><rect x="70" y="90" width="50" height="130"/><rect x="130" y="130" width="70" height="90"/><rect x="560" y="100" width="60" height="120"/><rect x="630" y="70" width="50" height="150"/><rect x="690" y="120" width="110" height="100"/></g><g class="rain">${rain}</g>${EX[i]}<rect y="190" width="800" height="30" fill="#0f172a" opacity=".45"/></svg>`}
+const V={"3h":{T:[0,1,2,3,4],min:[0,6,3,6,2,0],txt:"3 godz. lekcyjne: wstęp 10 min, 5 tur po 17 min, podsumowanie 15 min, rezerwa"},"2h":{T:[0,1,3,4],min:[0,5,3,5,1,0],txt:"2 godz. lekcyjne: wstęp 10 min, 4 tury po 14 min (bez ulewy), podsumowanie 12 min, rezerwa"}};
+const STG=["Wyzwanie","Zaprojektuj","Skonsultuj","Popraw i przedstaw","Ocena","Wynik tury"];
+const CR=[["Jakość i konkretność rozwiązania",["Brak użytecznego rozwiązania","Częściowo odpowiada na problem, jest ogólne","Odpowiada na problem, konkretne i uzasadnione"]],["Perspektywy zawodowe i ograniczenia",["Brak wkładu zawodów i wymagań zadania","Wkład jednego zawodu lub część ograniczeń","Wkład co najmniej dwóch zawodów i kluczowy warunek"]],["Konsultacja i informacja zwrotna",["Brak śladu konsultacji","Konkretna wskazówka od innej firmy","Rekomendacja dla innej firmy + wykorzystanie lub uzasadnione odrzucenie wskazówki"]]];
+let S=null;try{S=JSON.parse(localStorage.getItem("mz1"))}catch(e){}
+const save=()=>{try{localStorage.setItem("mz1",JSON.stringify(S))}catch(e){}};
+const K=()=>S.firms.length,N=()=>S.T.length,nm=(f,i)=>S.firms[f].m[i].n;
+const sub=(f,t)=>(S.perm[f%5]+t)%5;
+const ST=(f,t)=>{const a=TR[S.T[t]].s[sub(f,t)];return{z:a[0],w:a[1].split(";"),k:a[2]}};
+const tsk=(f,t,c)=>{const a=ST(f,t);return`<p class="task d">${a.z}</p>${c?"":`<ul>${a.w.map(x=>`<li>${x}</li>`).join("")}</ul>`}<p class="key">🔑 Warunek kluczowy: ${a.k}</p>`};
+const pts=(t,f)=>((S.sc[t]||[])[f]||[]).reduce((a,b)=>a+(b||0),0);
+const std=(t,f)=>{const c=(S.sc[t]||[])[f]||[];return pts(t,f)>=4&&c[2]>=1};
+const need=()=>Math.ceil(.75*K()),cnt=t=>S.firms.filter((_,f)=>std(t,f)).length,pass=t=>S.done[t]&&cnt(t)>=need();
+const tot=f=>S.T.reduce((a,_,t)=>a+(S.done[t]?pts(t,f):0),0);
+function grp(r,k){const a=[...Array(k).keys()];if(k%2)a.push(-1);const m=a.length,rest=a.slice(1),s=r%(m-1),b=[a[0],...rest.slice(s).concat(rest.slice(0,s))],o=[];for(let i=0;i<m/2;i++)o.push([b[i],b[m-1-i]]);const z=o.findIndex(p=>p.includes(-1));if(z>=0){const x=o[z].find(v=>v>=0);if(o.length>1){o.splice(z,1);o[0].push(x)}else o[z]=[x]}return o}
+function rot(n,T){const o=shuf([...Array(n).keys()]),r=Array.from({length:T},(_,t)=>({m:o[t%n],c:[]}));for(let j=T;j<n;j++)r[(j-T)%T].c.push(o[j]);return r}
+const rz=(f,t)=>{const r=S.firms[f].rot[t];return`🎤 <b>${nm(f,r.m)}</b>`+(r.c.length?` · ➕ ${r.c.map(i=>nm(f,i)).join(", ")} <small style="color:var(--m)">(pytanie 3)</small>`:"")};
+
+function setup(){$("#app").innerHTML=`<div class="card setup"><h2>Nowa gra</h2>
+<label>Wariant warsztatów<select id="v"><option value="3h">${V["3h"].txt}</option><option value="2h">${V["2h"].txt}</option></select></label>
+<label>Liczba uczniów (6–35)<input id="n" type="number" value="24" min="6" max="35"></label>
+<label>Liczba firm (puste = automatycznie, 3–6)<input id="k" type="number" min="3" max="6"></label>
+<label>Imiona uczniów (opcjonalnie, po jednym w wierszu)<textarea id="names" rows="4"></textarea></label>
+<button onclick="draw()">🎲 Losuj firmy i zawody</button></div>`}
+function draw(){let names=$("#names").value.split("\n").map(s=>s.trim()).filter(Boolean);const n=names.length||parseInt($("#n").value);
+ if(!n||n<6||n>35){alert("Wpisz liczbę uczniów od 6 do 35.");return}
+ if(!names.length)names=Array.from({length:n},(_,i)=>"Uczeń "+(i+1));
+ let k=parseInt($("#k").value)||Math.round(n/4.5);k=Math.max(3,Math.min(6,k,Math.floor(n/3)));
+ const v=$("#v").value,T=V[v].T,pool=AR.map((_,a)=>shuf(JB[a])),firms=Array.from({length:k},(_,f)=>({name:"Firma "+String.fromCharCode(65+f),m:[]}));
+ shuf(names).forEach((s,i)=>{const f=i%k,a=(f+Math.floor(i/k))%5;if(!pool[a].length)pool[a]=shuf(JB[a]);const[j,o]=pool[a].pop();firms[f].m.push({n:s,a,j,o})});
+ firms.forEach(f=>f.rot=rot(f.m.length,T.length));
+ S={v,T,firms,perm:shuf([0,1,2,3,4]),t:0,st:0,rev:{},sc:{},done:{},screen:"roster"};save();render()}
+function roster(){$("#app").innerHTML=`<h2 class="big" style="margin-bottom:12px">Firmy i karty zawodów</h2><div class="grid">${S.firms.map((f,i)=>`<div class="fc"><input class="nm" value="${f.name}" onchange="S.firms[${i}].name=this.value;save()" aria-label="Nazwa firmy">${f.m.map(m=>`<div class="jc" style="--c:${AR[m.a][2]}">${AR[m.a][0]} <b>${m.n}</b> – ${m.j}<small>${m.o}</small></div>`).join("")}</div>`).join("")}</div>
+<div class="nav"><button style="background:#64748b" onclick="setup()">🎲 Losuj ponownie</button><button onclick="S.screen='turn';stg();save();render()">Start: tura 1 ▶</button></div>`}
+function stg(){const m=V[S.v].min[S.st];if(m)$("#min").value=m}
+function go(d){if(S.st==5&&d>0){if(S.t==N()-1)S.screen="final";else{S.t++;S.st=0}}else S.st+=d;if(S.st==5)S.done[S.t]=true;else S.done[S.t]=false;stg();save();render();scrollTo(0,0)}
+function sc(f,c,v){(S.sc[S.t]=S.sc[S.t]||[])[f]=S.sc[S.t][f]||[null,null,null];S.sc[S.t][f][c]=v;save();render()}
+const okSc=()=>S.firms.every((_,f)=>((S.sc[S.t]||[])[f]||[]).filter(v=>v!=null).length==3);
+function city(){return`<div class="city">${S.T.map((_,t)=>S.done[t]?(pass(t)?"🏙️":"🏗️"):"⬜").join("")}<small>Miasto: ${S.T.filter((_,t)=>pass(t)).length} z ${N()}</small></div>`}
+function turn(){const t=S.t,ti=S.T[t],D=TR[ti];
+ let h=`<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px"><h2 class="big">Tura ${t+1}/${N()}: ${D.n}</h2>${city()}</div><div class="steps">${STG.map((s,i)=>`<div class="${i==S.st?"on":""}">${s}</div>`).join("")}</div>`;
+ if(S.st==0){h+=`<div class="hero">${scene(ti)}<div class="tx"><p>${D.p}</p><p style="color:var(--gold);margin-top:8px"><b>Rezultat:</b> ${D.r}</p></div></div>
+ <div class="card"><h3 style="margin-bottom:8px">Jak oceniamy waszą pracę (0–2 pkt za każde)</h3><div class="rub">${CR.map(c=>`<div><b>${c[0]}</b>${c[1].map((x,i)=>`<p><i>${i}</i> ${x}</p>`).join("")}</div>`).join("")}</div></div>
+ <div class="card"><h3>Rzecznicy tej tury <small style="color:var(--m);font-weight:500">(rzecznik jest też liderem zespołu)</small></h3>${S.rev[t]?`<div class="grid" style="margin-top:10px">${S.firms.map((f,i)=>`<div class="fc" style="animation-delay:${i*.15}s"><b>${f.name}</b><p style="margin-top:6px">${rz(i,t)}</p></div>`).join("")}</div>`:`<button style="margin-top:10px" onclick="S.rev[S.t]=true;save();render()">🎲 Losuj rzeczników</button>`}</div>`}
+ if(S.st==1)h+=`<div style="display:flex;justify-content:space-between;gap:10px;margin-bottom:10px"><p style="color:var(--m)">Każdy ma wkład: pomysł, pytanie, szkic lub uwagę. Korzystajcie z perspektyw z kart zawodów.</p><div style="display:flex;gap:8px;flex-wrap:wrap"><button onclick="qrs()" style="white-space:nowrap">📱 Arkusze na telefon (QR)</button><button onclick="prn()" style="background:#64748b;white-space:nowrap">🖨️ Drukuj</button></div></div><div class="grid">${S.firms.map((f,i)=>`<div class="fc"><h3>${f.name}</h3>${tsk(i,t)}<p style="margin-top:8px">${rz(i,t)}</p></div>`).join("")}</div>`;
+ if(S.st==2){const G=grp(t,K());h+=`<p style="margin-bottom:10px;color:var(--m)">Rzecznik przedstawia roboczy pomysł innej firmie i prosi o konkretną wskazówkę. Reszta zespołu przygotowuje pytania. To nie konkurs.</p><div class="grid">${G.map(g=>`<div class="fc"><h3>${g.map(f=>S.firms[f].name).join(" ⇄ ")}</h3>${g.length==3?g.map((f,j)=>`<p style="margin-top:6px">${S.firms[f].name} przedstawia → <b>${S.firms[g[(j+1)%3]].name}</b></p>`).join(""):""}${g.map(f=>`<p style="margin-top:6px">${rz(f,t)}</p>`).join("")}</div>`).join("")}</div>`}
+ if(S.st==3)h+=`<div class="card"><h3>Rzecznik (20–25 s) odpowiada na trzy pytania:</h3><ol style="padding-left:24px;line-height:2;font-size:1.2rem"><li>Jaki problem rozwiązujemy?</li><li>Na czym polega nasze rozwiązanie?</li><li>Co zmieniliśmy lub przemyśleliśmy po konsultacji?</li></ol></div><div class="grid">${S.firms.map((f,i)=>`<div class="fc"><h3>${f.name}</h3>${tsk(i,t,1)}<p style="margin-top:8px">${rz(i,t)}</p></div>`).join("")}</div>`;
+ if(S.st==4){h+=`<div class="card"><div class="rub">${CR.map(c=>`<div><b>${c[0]}</b>${c[1].map((x,i)=>`<p><i>${i}</i> ${x}</p>`).join("")}</div>`).join("")}</div></div><div class="card sc"><div></div>${CR.map((c,i)=>`<div class="h">${i+1}. ${c[0].split(" ")[0]}</div>`).join("")}${S.firms.map((f,i)=>{const r=(S.sc[t]||[])[i]||[];return`<div><b>${f.name}</b><small style="display:block;color:var(--m)">🔑 ${ST(i,t).k}</small></div>${[0,1,2].map(c=>`<div>${[0,1,2].map(v=>`<button class="pt ${r[c]===v?"on":""}" onclick="sc(${i},${c},${v})">${v}</button>`).join(" ")}</div>`).join("")}`}).join("")}</div>`}
+ if(S.st==5){const c=cnt(t),ok=pass(t);h+=`<div class="hero"><div class="tx" style="text-align:center;font-size:1.3rem"><div style="font-size:4rem">${ok?"🏙️":"🏗️"}</div><h2>${ok?"Wyzwanie zaliczone!":"Miasto pracuje dalej"}</h2><p>${c} z ${K()} firm spełniło standard (potrzeba ${need()}).</p><p style="color:var(--m);font-size:1rem">Standard: co najmniej 4 z 6 pkt i konkretna konsultacja.</p></div></div>`}
+ h+=`<div class="nav"><button style="background:#64748b" onclick="go(-1)" ${S.st==0||S.st==5?"disabled":""}>◀ Wstecz</button><button onclick="go(1)" ${(S.st==0&&!S.rev[t])||(S.st==4&&!okSc())?"disabled":""}>${S.st==5?(t==N()-1?"Podsumowanie ▶":"Następna tura ▶"):"Dalej ▶"}</button></div>`;
+ $("#app").innerHTML=h}
+function prn(){const t=S.t,D=TR[S.T[t]],L=n=>'<div class="ln"></div>'.repeat(n);
+ $("#pr").innerHTML=S.firms.map((f,i)=>{const a=ST(i,t),r=f.rot[t];return`<div class="pg"><h2>Miasto Zawodów · Tura ${t+1}: ${D.n}</h2><p><b>Firma:</b> ${f.name} &nbsp;&nbsp; <b>Rzecznik:</b> ${f.m[r.m].n}${r.c.length?" + "+r.c.map(c=>f.m[c].n).join(", "):""}</p><p><b>Zadanie:</b> ${a.z}</p><p><b>Wymagania:</b> ${a.w.join("; ")}.</p><p class="key">🔑 Warunek kluczowy: ${a.k}</p><p><b>Rezultat:</b> ${D.r}</p>
+<h4>1. Nasz pomysł (wersja 1)</h4>${L(3)}<h4>2. Wkład zawodów w rozwiązanie</h4><table>${f.m.map(m=>`<tr><td style="width:40%">${m.n} – ${m.j}</td><td></td></tr>`).join("")}</table><h4>3. Szkic</h4><div class="bx"></div><h4>4. Konsultacja z firmą: ……………………</h4><p>Wskazówka, którą dostaliśmy:</p>${L(1)}<p>Nasza rekomendacja dla nich:</p>${L(1)}<h4>5. Co zmieniliśmy po konsultacji (albo dlaczego odrzuciliśmy wskazówkę)</h4>${L(2)}<h4>6. Przewidywany efekt (kto, gdzie, co się zmieni)</h4>${L(1)}</div>`}).join("");print()}
+function rank(){const r=S.firms.map((f,i)=>({n:f.name,p:tot(i)})).sort((a,b)=>b.p-a.p);return`<table><tr><th>#</th><th>Firma</th><th>Punkty</th></tr>${r.map((x,j)=>`<tr><td>${j+1}</td><td>${j==0?"🏆 ":""}${x.n}</td><td><b>${x.p}</b></td></tr>`).join("")}</table>`}
+function final(){const w=S.T.filter((_,t)=>pass(t)).length;
+ $("#app").innerHTML=`<h2 class="big">Podsumowanie gry</h2><div class="card" style="text-align:center"><div class="city" style="justify-content:center;font-size:3rem">${S.T.map((_,t)=>pass(t)?"🏙️":"🏗️").join("")}</div><h2 style="margin-top:8px">Miasto Przyszłości: ${w} z ${N()} wyzwań zaliczonych</h2></div>
+ <div class="card"><h3 style="margin-bottom:8px">🏆 Firma Roku</h3>${rank()}</div>
+ <div class="card"><h3>Pytania do rozmowy</h3><ol style="padding-left:22px;line-height:1.8"><li>Które zadanie było najtrudniejsze i dlaczego?</li><li>Co wnieśli do projektu przedstawiciele różnych zawodów?</li><li>Czy wskazówka od innej firmy zmieniła wasz pomysł?</li><li>Jak rozwiązaliście różnice zdań?</li><li>Co pomagało wam współpracować, a co utrudniało?</li><li>Która kompetencja była najważniejsza w waszym zespole?</li><li>Czego dowiedzieliście się o zawodach, których wcześniej nie znaliście?</li></ol></div>`}
+function render(){if(!S)return setup();({roster,turn,final})[S.screen]()}
+$("#rk").onclick=()=>{if(!S||S.screen=="roster")return;$("#dlg").style.width="";$("#dlg").innerHTML=`<h2 style="margin-bottom:10px">Ranking (podgląd nauczyciela)</h2>${rank()}<button style="margin:14px auto 0;display:block" onclick="$('#dlg').close()">Zamknij</button>`;$("#dlg").showModal()};
+$("#nw").onclick=()=>{if(!S||confirm("Zacząć nową grę? Obecny stan zostanie usunięty.")){S=null;try{localStorage.removeItem("mz1")}catch(e){}setup()}};
+let left=0,tk=null;const clk=$("#clk"),show=()=>{clk.textContent=String(Math.floor(left/60)).padStart(2,"0")+":"+String(left%60).padStart(2,"0")};
+$("#ts").onclick=()=>{clearInterval(tk);left=(parseInt($("#min").value)||5)*60;clk.className="";show();tk=setInterval(()=>{left--;show();if(left<=0){clearInterval(tk);clk.textContent="KONIEC";clk.className="end"}},1000)};
+$("#tr").onclick=()=>{clearInterval(tk);left=0;clk.className="";show()};
+const cl=x=>String(x).replace(/[~.]/g,""),esc=x=>String(x).replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+function lnk(f){const t=S.t,F=S.firms[f],r=F.rot[t];return location.origin+location.pathname+"#a="+encodeURIComponent([S.T[t],sub(f,t),cl(F.name),[r.m,...r.c].join("."),...F.m.map(m=>cl(m.n)+"."+m.a+"."+JB[m.a].findIndex(x=>x[0]==m.j))].join("~"))}
+function qrs(){const d=$("#dlg");d.style.width="min(1100px,96vw)";
+ d.innerHTML=`<h2 style="margin-bottom:6px">📱 Arkusze elektroniczne</h2><p style="color:var(--m);margin-bottom:12px">Rzecznik skanuje kod swojej firmy telefonem. Arkusz zapisuje się w jego telefonie i można go pokazać nauczycielowi.</p>${location.protocol=="file:"?'<p class="key">Aplikacja jest otwarta z pliku na komputerze. Kody zadziałają dopiero po wgraniu strony na GitHub Pages.</p>':""}<div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(210px,1fr))">${S.firms.map((f,i)=>{let g="";try{const q=qrcode(0,"L");q.addData(lnk(i));q.make();g=q.createSvgTag(4,2)}catch(e){g="<p style='color:#000'>Brak biblioteki QR (sprawdź internet)</p>"}return`<div class="fc" style="text-align:center"><b>${f.name}</b><div class="qq" style="background:#fff;border-radius:10px;padding:4px;margin:8px 0">${g}</div><small>🎤 ${esc(f.m[f.rot[S.t].m].n)}</small></div>`}).join("")}</div><button style="margin:14px auto 0;display:block" onclick="$('#dlg').close()">Zamknij</button>`;d.showModal()}
+function sheetMode(){document.querySelector("header").style.display="none";
+ const d=decodeURIComponent(location.hash.slice(3)).split("~"),D=TR[+d[0]],a=D&&D.s[+d[1]];
+ if(!a){$("#app").innerHTML="<p class='card'>Nieprawidłowy link do arkusza.</p>";return}
+ const w=a[1].split(";"),rs=d[3].split(".").map(Number),M=d.slice(4).map(x=>{const[n,ar,j]=x.split(".");return{n:esc(n),j:JB[+ar][+j][0]}}),key="mzs"+location.hash,fn=esc(d[2]);
+ let V={};try{V=JSON.parse(localStorage.getItem(key))||{}}catch(e){}
+ const T=(id,l,r)=>`<label class="sl">${l}<textarea data-k="${id}" rows="${r||3}">${esc(V[id]||"")}</textarea></label>`;
+ $("#app").innerHTML=`<div class="sheet"><p style="color:var(--m)">${D.n}</p><h2>${fn}</h2><p>🎤 ${rs.map(i=>M[i].n).join(", ")}</p><div class="card" style="margin-top:10px"><p class="task d">${a[0]}</p><ul style="padding-left:20px">${w.map(x=>`<li>${x}</li>`).join("")}</ul><p class="key">🔑 Warunek kluczowy: ${a[2]}</p><p style="margin-top:8px;color:var(--m)">Rezultat: ${D.r}</p></div><div id="pgb" class="pgb"></div>
+ ${T("i","1. Nasz pomysł (wersja 1)",4)}<div class="sl">2. Wkład zawodów</div>${M.map((m,i)=>T("w"+i,`${m.n} – ${m.j}`,2)).join("")}<p style="color:var(--m);margin-bottom:12px">✏️ Szkic zróbcie na kartce.</p>${T("kf","3. Konsultacja: z którą firmą?",1)}${T("kw","Wskazówka, którą dostaliśmy")}${T("kr","Nasza rekomendacja dla nich")}${T("z","4. Co zmieniliśmy po konsultacji (albo dlaczego odrzuciliśmy wskazówkę)")}${T("e","5. Przewidywany efekt (kto, gdzie, co się zmieni)")}<button id="sh" style="width:100%;padding:14px">👀 Pokaż nauczycielowi</button></div>`;
+ const pr=()=>{const c=[V.i,M.some((_,i)=>V["w"+i]),V.kf&&V.kw&&V.kr,V.z,V.e].filter(x=>x&&String(x).trim()).length;$("#pgb").textContent=`Wypełniono ${c} z 5 części`};pr();
+ document.querySelectorAll("textarea").forEach(t=>t.oninput=()=>{V[t.dataset.k]=t.value;try{localStorage.setItem(key,JSON.stringify(V))}catch(e){}pr()});
+ $("#sh").onclick=()=>{const g=k=>esc(V[k]||"—"),o=document.createElement("div");o.className="ov";
+  o.innerHTML=`<h2>${fn}</h2><p>${a[0]}</p><h3>Pomysł</h3><p>${g("i")}</p><h3>Wkład zawodów</h3>${M.map((m,i)=>`<p><b>${m.n}</b> (${m.j}): ${g("w"+i)}</p>`).join("")}<h3>Konsultacja</h3><p>Firma: ${g("kf")}</p><p>Wskazówka: ${g("kw")}</p><p>Nasza rekomendacja: ${g("kr")}</p><h3>Co zmieniliśmy</h3><p>${g("z")}</p><h3>Przewidywany efekt</h3><p>${g("e")}</p><button onclick="this.parentNode.remove()">Zamknij</button>`;document.body.append(o)}}
+
+if(location.hash.startsWith("#a="))sheetMode();else render();
+</script></body></html>

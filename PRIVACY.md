@@ -1,6 +1,6 @@
 # Informacja o prywatności: Miasto Zawodów
 
-Administratorem danych jest \[Maciej Natanek], kontakt: \[nextstep.doradztwo@gmail.com].
+Administratorem danych jest \Maciej Natanek, kontakt: \nextstep.doradztwo@gmail.com.
 
 ## Co robi aplikacja
 

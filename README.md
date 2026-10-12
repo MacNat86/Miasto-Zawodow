@@ -2,7 +2,7 @@
 
 Gra edukacyjna dla uczniów klas ósmych: uczniowie pracują w firmach doradczych dla miasta, poznają zawody i ćwiczą współpracę.
 
-(c) 2026 \Maciej Natanek. Wszelkie prawa zastrzeżone. Szczegóły w pliku `LICENSE`.
+(c) 2026 Maciej Natanek. Wszelkie prawa zastrzeżone. Szczegóły w pliku `LICENSE`.
 
 ## Zawartość
 
@@ -13,9 +13,9 @@ Gra edukacyjna dla uczniów klas ósmych: uczniowie pracują w firmach doradczyc
 
 ## Użycie
 
-Aplikacja służy do prowadzenia warsztatów przez autora lub osoby, którym autor udzielił pisemnej zgody. Wykorzystanie komercyjne, kopiowanie i modyfikacje wymagają zgody autora: \nextstep.doradztwo@gmail.com.
+Aplikacja służy do prowadzenia warsztatów przez autora lub osoby, którym autor udzielił pisemnej zgody. Wykorzystanie komercyjne, kopiowanie i modyfikacje wymagają zgody autora: nextstep.doradztwo@gmail.com.
 
 ## Zgłaszanie błędów bezpieczeństwa
 
-Prosimy o kontakt mailowy: \nextstep.doradztwo@gmail.com. Nie zgłaszaj problemów bezpieczeństwa publicznie w zgłoszeniach (Issues).
+Prosimy o kontakt mailowy: nextstep.doradztwo@gmail.com. Nie zgłaszaj problemów bezpieczeństwa publicznie w zgłoszeniach (Issues).
 
